@@ -1,16 +1,24 @@
 {{define "layout_before"}}
     {{template  "head" }}
-    <body class="c-app">
+<body class="c-app">
 
-    {{template  "side_menus" }}
+{{template  "side_menus" }}
 
-    <div class="c-wrapper c-fixed-components">
+<div class="c-wrapper c-fixed-components">
 
-        {{template "header"}}
+    {{template "header" .}}
 
-        <div class="c-body">
-            <main class="c-main">
-                <div class="container-fluid">
-
-
+    <div class="c-body">
+        <main class="c-main">
+            <div class="container-fluid">
+                {{if  .alertMsg.msg }}
+                <div class="row">
+                    <div class="alert alert-{{.alertMsg.type}} alert-dismissible fade show" role="alert" id='tip_msg'>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{.alertMsg.msg}}
+                    </div>
+                </div>
+                {{end}}
 {{end}}

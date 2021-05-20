@@ -16,7 +16,9 @@ func AdminRouters(r *gin.Engine) {
 		crms.GET("/homes", contorllercrms.HomeIndex)
 		articles := crms.Group("/articles")
 		{
-			articles.GET("", contorllercrms.ArticlesIndex)
+			articles.GET("", contorllercrms.ArticleIndex)
+			articles.GET("/new", contorllercrms.ArticleNew)
+			articles.POST("/create",contorllercrms.ArticleCreate)
 		}
 	}
 
