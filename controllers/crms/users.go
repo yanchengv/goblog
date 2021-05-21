@@ -2,7 +2,7 @@ package contorllercrms
 
 import (
 	"github.com/gin-gonic/gin"
-	pagination "goblog/lib"
+	pagination2 "goblog/lib/pagination"
 	"goblog/models"
 	"html/template"
 	"net/http"
@@ -20,7 +20,7 @@ func UserIndex(c *gin.Context) {
 	models.DB.Offset((pageIndex - 1) * pageSize).Limit(pageSize).Find(&users)
 	models.DB.Model(&models.User{}).Count(&totalCount)
 	//创建一个分页器，100条数据，每页10条
-	pagination := pagination.Initialize(c.Request, totalCount, pageSize)
+	pagination := pagination2.Initialize(c.Request, totalCount, pageSize)
 	c.HTML(http.StatusOK, "users/index.html", gin.H{
 		"breadcrumb": breadcrumb,
 		//"alertMsg":   alertMsg,
