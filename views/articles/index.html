@@ -19,7 +19,11 @@
                 <td>{{$article.Title}}</td>
                 <td>{{$article.Subtitle}}</td>
                 <td>{{$article.CreatedAt.Format "2006-01-02 15:04:05"}}</td>
-                <td>操作</td>
+                <td>
+                    <button type="button" class="btn btn-primary" onclick="deleteArticle({{$article.ID}})">
+                        删除
+                    </button>
+                </td>
             </tr>
         {{end}}
 
@@ -29,5 +33,6 @@
     {{.paginate}}
 
     {{template "layout_after"}}
+    {{template "articles/modal.html"}}
 
 {{end}}

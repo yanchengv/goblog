@@ -14,7 +14,7 @@ func ArticleIndex(c *gin.Context) {
 	breadcrumb := map[string]string{"m1": "数据管理", "m2": "文章管理", "m2url": "#", "m3": "文章列表"}
 	var articles []models.Article
 	var totalCount int64
-	pageSize := 20
+	pageSize := 10
 	page, _ := strconv.Atoi(c.DefaultQuery("page", "0"))
 
 	//创建一个分页器，100条数据，每页10条
@@ -50,5 +50,11 @@ func ArticleCreate(c *gin.Context) {
 	//q.Set("amount", "13123")
 	//location := url.URL{Path: "/crms/articles", RawQuery: q.Encode()}
 	//c.Redirect(http.StatusFound, location.RequestURI())
+	c.Redirect(http.StatusFound, "/crms/articles")
+}
+
+func ArticleDestroy(c *gin.Context) {
+	articleID := c.PostForm("articleID")
+	models.DB.Delete(&models.Article{}, articleID)
 	c.Redirect(http.StatusFound, "/crms/articles")
 }

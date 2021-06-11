@@ -24,7 +24,13 @@ func UserIndex(c *gin.Context) {
 	c.HTML(http.StatusOK, "users/index.html", gin.H{
 		"breadcrumb": breadcrumb,
 		//"alertMsg":   alertMsg,
-		"paginate":   template.HTML(pagination.Pages()),
-		"users":      users,
+		"paginate": template.HTML(pagination.Pages()),
+		"users":    users,
 	})
+}
+
+func UserDestroy(c *gin.Context) {
+	userID := c.PostForm("userID")
+	models.DB.Delete(&models.User{}, userID)
+	c.Redirect(http.StatusFound, "/crms/users")
 }
